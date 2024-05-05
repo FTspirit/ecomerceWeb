@@ -1,0 +1,26 @@
+# Dependencies
+node_modules
+yarn.lock
+
+# yarn error logs
+yarn-error.log
+
+# Environment varibales
+.env*
+!.env*.example
+
+# Code coverage
+coverage
+
+#postgre database
+setup/db/postgres-data
+
+.DS_Store
+
+.idea
+
+config/config_database_datapoint.json
+
+config/config_database_product.json
+
+config/config.json
