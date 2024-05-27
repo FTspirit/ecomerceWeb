@@ -12,8 +12,8 @@ module.exports = (sequelize, DataTypes) => {
         primaryKey: true,
         autoIncrement: true,
       },
-      totalAmount: DataTypes.INTEGER,
-      customerId: DataTypes.INTEGER,
+      total_amount: DataTypes.INTEGER,
+      customer_id: DataTypes.INTEGER,
       address: DataTypes.TEXT,
       tracking_number: DataTypes.INTEGER,
       is_delivery: DataTypes.BOOLEAN,
@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
   Order.associate = function (models) {
     Order.hasMany(models.order_detail, {
       foreignKey: 'orderId',
-      as: 'order_detail'
+      as: 'order_detail',
     });
   };
   return Order;

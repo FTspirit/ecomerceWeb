@@ -16,10 +16,10 @@ module.exports = (sequelize, DataTypes) => {
       description: DataTypes.TEXT,
       rating: DataTypes.FLOAT,
       price: DataTypes.FLOAT,
-      salePrice: DataTypes.FLOAT,
-      categoryId: DataTypes.INTEGER,
+      sale_price: DataTypes.FLOAT,
+      category_id: DataTypes.INTEGER,
       image: DataTypes.ARRAY(DataTypes.TEXT),
-      feedbackById: DataTypes.TEXT,
+      feedback_by_id: DataTypes.TEXT,
       created_at: DataTypes.INTEGER,
       updated_at: DataTypes.INTEGER,
     },
@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
   Products.associate = function (models) {
     Products.hasMany(models.order_detail, {
       foreignKey: 'orderId',
-      as: 'order_detail'
+      as: 'order_detail',
     });
   };
   return Products;

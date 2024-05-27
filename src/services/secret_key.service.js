@@ -2,7 +2,7 @@
 const db = require('../models');
 
 // Import Model
-const { secretKey } = db;
+const { secret_key } = db;
 
 /**
  * Create one secret key
@@ -10,7 +10,7 @@ const { secretKey } = db;
  * @returns {Promise<secretKey>}
  */
 const createSecretKey = (secretKeyData) => {
-  return secretKey.create(secretKeyData);
+  return secret_key.create(secretKeyData);
 };
 
 /**
@@ -19,7 +19,7 @@ const createSecretKey = (secretKeyData) => {
  * @returns {Promise<secretKey>}
  */
 const findOneSecretKey = (customer_id) => {
-  return secretKey.findOne({
+  return secret_key.findOne({
     where: {
       customer_id,
     },
@@ -32,7 +32,7 @@ const findOneSecretKey = (customer_id) => {
  * @returns {Promise<secretKey>}
  */
 const deleteSecretkeyByCustomerId = (customer_id) => {
-  return secretKey.destroy({
+  return secret_key.destroy({
     where: {
       customer_id,
     },
@@ -51,7 +51,7 @@ const deleteSecretkeyByCustomerId = (customer_id) => {
  * @returns {Promise<secretKey>}
  */
 const findAllSecretKey = (customer_id) => {
-  return secretKey.findAll({
+  return secret_key.findAll({
     where: {
       customer_id,
     },
