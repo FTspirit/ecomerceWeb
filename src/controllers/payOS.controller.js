@@ -14,6 +14,16 @@ const receiveDataHook = catchAsync(async (req, res) => {
   res.status(200).send({ code: '00', desc: 'success' });
 });
 
+const confirmPayOsWebhook = catchAsync(async (req, res) => {
+  const { webhookUrl } = req.body;
+  try {
+    const updateWebhook = await payos.confirmWebhook(webhookUrl);
+    res.status(200).send({ webhookData: updateWebhook });
+  } catch (error) {
+    throw new ApiError(500, 'Hệ thống đang bảo trì vui lòng thử lại sau!');
+  }
+});
+
 const createPaymentPayosController = catchAsync(async (req, res) => {
   const { amount, description, orderCode } = req.body;
   const order = {
@@ -34,4 +44,5 @@ const createPaymentPayosController = catchAsync(async (req, res) => {
 module.exports = {
   createPaymentPayosController,
   receiveDataHook,
+  confirmPayOsWebhook,
 };
