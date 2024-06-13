@@ -16,8 +16,8 @@ const createPaymentPayosController = catchAsync(async (req, res) => {
     amount,
     description,
     orderCode,
-    returnUrl: 'http://localhost:3000/success',
-    cancelUrl: 'http://localhost:3000/error',
+    returnUrl: 'http://10.10.60.103:9875/success',
+    cancelUrl: 'http://10.10.60.103:9875/error',
   };
   try {
     const paymentLink = await payos.createPaymentLink(order);
