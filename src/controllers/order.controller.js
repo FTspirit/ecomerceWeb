@@ -20,7 +20,7 @@ const createOrderController = catchAsync(async (req, res) => {
     tracking_number: tracking_number || null,
     is_delivery: is_delivery || null,
     payment: payment || null,
-    payment_status: payment_status || null,
+    payment_status: payment_status || 'pending',
   };
   const createData = await orderService.createOrder(orderData);
   const orderDetailData = [];

@@ -3,6 +3,7 @@
 const PayOS = require('@payos/node');
 const catchAsync = require('../helpers/catchAsync');
 const ApiError = require('../helpers/ApiError');
+const orderService = require('../services/order.service');
 
 const payos = new PayOS(
   'f7592266-fa7d-42e7-a341-fb63ac138a76',
@@ -45,8 +46,18 @@ const createPaymentPayosController = catchAsync(async (req, res) => {
   }
 });
 
+const updatePaymentStatus = catchAsync(async (req, res) => {
+  const { order_id, status, cancel, code, id } = req.body;
+  const checkOrder = await orderService.listOderById(order_id);
+  if (code === '00' && status === 'paid') {
+    checkOrder.payment_status = 'success';
+  }
+  res.status(200).send({ message: 'update successfully!!' });
+});
+
 module.exports = {
   createPaymentPayosController,
   receiveDataHook,
   confirmPayOsWebhook,
+  updatePaymentStatus,
 };

@@ -8,6 +8,7 @@ const categoryRoute = require('./category.route');
 const momoRoute = require('./momo.route');
 const vnpayRoute = require('./vnpay.route');
 const pdfRoute = require('./pdf.route');
+const orderRoute = require('./order.route');
 
 const router = express.Router();
 
@@ -43,6 +44,10 @@ const defaultRoutes = [
   {
     path: '/pdf',
     route: pdfRoute,
+  },
+  {
+    path: '/order',
+    route: orderRoute,
   },
 ];
 

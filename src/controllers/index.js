@@ -6,3 +6,4 @@ module.exports.categoryController = require('./category.controller');
 module.exports.momoController = require('./momo.controller');
 module.exports.vnpayController = require('./vnpay.controller');
 module.exports.pdfController = require('./pdf.controller');
+module.exports.orderController = require('./order.controller');
