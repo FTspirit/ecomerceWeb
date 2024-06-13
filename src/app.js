@@ -10,6 +10,7 @@ const config = require('./config/config');
 const morgan = require('./config/morgan');
 const routesV4 = require('./routes/v4');
 const { errorConverter, errorHandler } = require('./middlewares/error');
+const { payOsController } = require('./controllers/index');
 
 const ApiError = require('./helpers/ApiError');
 
@@ -56,6 +57,7 @@ app.options('*', cors());
 
 // v1 api routes
 app.use('/v4', routesV4);
+app.use('/payos/webhook', payOsController.receiveDataHook);
 
 app.get('/', (req, res) => {
   res.status(200).json({ status: 'ok' });

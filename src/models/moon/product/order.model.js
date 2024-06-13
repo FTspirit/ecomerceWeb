@@ -19,6 +19,15 @@ module.exports = (sequelize, DataTypes) => {
       is_delivery: DataTypes.BOOLEAN,
       created_at: DataTypes.INTEGER,
       updated_at: DataTypes.INTEGER,
+      payment: {
+        type: DataTypes.ENUM('payos', 'vnpay', 'zalopay', 'momo'),
+        allowNull: false,
+      },
+      payment_status: {
+        type: DataTypes.ENUM('pending', 'success', 'fail', 'cancel'),
+        allowNull: false,
+        defaultValue: 'pending',
+      },
     },
     {
       tableName: 'order',

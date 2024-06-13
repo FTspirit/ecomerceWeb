@@ -10,6 +10,10 @@ const payos = new PayOS(
   'df01c9285003d552e226d46f17326ffda8c217de492ea8e674ecac64403f344a'
 );
 
+const receiveDataHook = catchAsync(async (req, res) => {
+  res.status(200).send({ code: '00', desc: 'success' });
+});
+
 const createPaymentPayosController = catchAsync(async (req, res) => {
   const { amount, description, orderCode } = req.body;
   const order = {
@@ -29,4 +33,5 @@ const createPaymentPayosController = catchAsync(async (req, res) => {
 
 module.exports = {
   createPaymentPayosController,
+  receiveDataHook,
 };
