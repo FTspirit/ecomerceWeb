@@ -11,6 +11,10 @@ const payos = new PayOS(
 );
 
 const receiveDataHook = catchAsync(async (req, res) => {
+  const { data, code, desc } = req.body;
+  console.log('data', data);
+  console.log('code', code);
+  console.log('desc', desc);
   res.status(200).send({ code: '00', desc: 'success' });
 });
 
