@@ -24,6 +24,18 @@ const listProductById = (id) => {
 };
 
 /**
+ * Find all product by Name
+ * @returns {Promise<products>}
+ */
+const listProductByName = (title) => {
+  return products.findOne({
+    where: {
+      title,
+    },
+  });
+};
+
+/**
  * Create product
  * @returns {Promise<products>}
  */
@@ -35,4 +47,5 @@ module.exports = {
   listProduct,
   listProductById,
   createProduct,
+  listProductByName,
 };

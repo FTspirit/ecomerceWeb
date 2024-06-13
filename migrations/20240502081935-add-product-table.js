@@ -1,4 +1,3 @@
-
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('products', {
@@ -27,15 +26,9 @@ module.exports = {
         type: Sequelize.FLOAT,
         allowNull: true,
       },
-      categoryId: {
-        type: Sequelize.INTEGER,
+      category: {
+        type: Sequelize.TEXT,
         allowNull: true,
-        references: {
-          model: 'category',
-          key: 'id',
-        },
-        onUpdate: 'SET NULL',
-        onDelete: 'SET NULL',
       },
       image: {
         type: Sequelize.ARRAY(Sequelize.STRING),

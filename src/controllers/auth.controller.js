@@ -42,7 +42,7 @@ const loginController = catchAsync(async (req, res) => {
   const access_token = await Utils.createTokenWithCustomerSecret(customer.id, newSecretKey, tokenType.access);
   const refresh_token = await Utils.createTokenWithCustomerSecret(customer.id, newSecretKey, tokenType.refresh);
   const customerData = {
-    customer_id: customer.id,
+    customer,
     access_token,
     refresh_token,
   };

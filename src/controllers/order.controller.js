@@ -22,10 +22,6 @@ const createCategoryController = catchAsync(async (req, res) => {
     category_name: category_name || null,
     category_image: category_image || null,
   };
-  const categoryDataCheck = await categoryService.listCategoryByName(category_name);
-  if (categoryDataCheck) {
-    throw new ApiError(httpStatus.BAD_REQUEST, 'Category already exists!');
-  }
   const createData = await categoryService.createCategory(categoryData);
   res.status(200).send(createData);
 });

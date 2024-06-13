@@ -50,7 +50,7 @@ app.use((req, res, next) => {
 
 // enable cors
 app.use(cors());
-app.options('*', cors());
+app.use(express.json());
 
 // v1 api routes
 app.use('/v4', routesV4);

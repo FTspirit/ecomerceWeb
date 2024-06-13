@@ -1,3 +1,8 @@
+/* eslint-disable no-console */
+/* eslint-disable no-continue */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-await-in-loop */
 /* eslint-disable camelcase */
 const httpStatus = require('http-status');
 const ApiError = require('../helpers/ApiError');
@@ -6,7 +11,7 @@ const { productService } = require('../services/index');
 const messageError = require('../config/messageError');
 
 const listProductController = catchAsync(async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.query;
   let listProduct;
   if (id) {
     listProduct = await productService.listProductById(id);
@@ -17,35 +22,97 @@ const listProductController = catchAsync(async (req, res) => {
 });
 
 const createProductController = catchAsync(async (req, res) => {
-  const { name, description, rating, price, sale_price, category_id, image, feedback_by_id } = req.body;
-  const productData = {
-    name: name || null,
-    description: description || null,
-    rating: rating || null,
-    price: price || null,
-    sale_price: sale_price || null,
-    category_id: category_id || null,
-    image: image || null,
-    feedback_by_id: feedback_by_id || null,
-  };
-  const createData = await productService.createProduct(productData);
-  res.status(200).send(createData);
+  const { productDatas } = req.body;
+  for (const product of productDatas) {
+    const {
+      tag,
+      tag_line,
+      hero_image,
+      category,
+      images,
+      brand,
+      title,
+      info,
+      type,
+      connectivity,
+      final_price,
+      original_price,
+      quantity,
+      ratings,
+      rate_count,
+      path,
+    } = product;
+    try {
+      const productDataCheck = await productService.listProductByName(title);
+      if (productDataCheck) {
+        continue;
+      }
+      const productData = {
+        tag: tag || null,
+        tag_line: tag_line || null,
+        hero_image: hero_image || null,
+        categorys: category || null,
+        images: images || null,
+        brand: brand || null,
+        title: title || null,
+        info: info || null,
+        type: type || null,
+        connectivity: connectivity || null,
+        final_price: final_price || null,
+        original_price: original_price || null,
+        quantity: quantity || null,
+        ratings: ratings || null,
+        rate_count: rate_count || null,
+        path: path || null,
+      };
+      const createData = await productService.createProduct(productData);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  res.status(200).send({ message: 'Create product successfully!' });
 });
 
 const updateProductController = catchAsync(async (req, res) => {
-  const { product_id, name, description, rating, price, sale_price, category_id, image, feedback_by_id } = req.body;
+  const {
+    tag,
+    tag_line,
+    hero_image,
+    product_id,
+    category,
+    image,
+    brand,
+    title,
+    info,
+    type,
+    connectivity,
+    final_price,
+    original_price,
+    quantity,
+    ratings,
+    rate_count,
+    path,
+  } = req.body;
   const productDataUpdate = await productService.listProductById(product_id);
   if (productDataUpdate) {
     throw new ApiError(httpStatus, messageError.InternalServerError.vn);
   }
-  productDataUpdate.name = name || productDataUpdate.name;
-  productDataUpdate.description = description || productDataUpdate.description;
-  productDataUpdate.rating = rating || productDataUpdate.rating;
-  productDataUpdate.price = price || productDataUpdate.price;
-  productDataUpdate.sale_price = sale_price || productDataUpdate.sale_price;
-  productDataUpdate.category_id = category_id || productDataUpdate.category_id;
+  productDataUpdate.tag = tag || productDataUpdate.tag;
+  productDataUpdate.tag_line = tag_line || productDataUpdate.tag_line;
+  productDataUpdate.hero_image = hero_image || productDataUpdate.hero_image;
+  productDataUpdate.category = category || productDataUpdate.category_id;
   productDataUpdate.image = image || productDataUpdate.image;
-  productDataUpdate.feedback_by_id = feedback_by_id || productDataUpdate.feedback_by_id;
+  productDataUpdate.brand = brand || productDataUpdate.brand;
+  productDataUpdate.title = title || productDataUpdate.title;
+  productDataUpdate.info = info || productDataUpdate.info;
+  productDataUpdate.type = type || productDataUpdate.type;
+  productDataUpdate.connectivity = connectivity || productDataUpdate.connectivity;
+  productDataUpdate.final_price = final_price || productDataUpdate.final_price;
+  productDataUpdate.original_price = original_price || productDataUpdate.original_price;
+  productDataUpdate.quantity = quantity || productDataUpdate.quantity;
+  productDataUpdate.ratings = ratings || productDataUpdate.ratings;
+  productDataUpdate.rate_count = rate_count || productDataUpdate.rateCount;
+  productDataUpdate.path = path || productDataUpdate.path;
 
   res.status(200).send({ message: 'Update data successfuly!!' });
 });
