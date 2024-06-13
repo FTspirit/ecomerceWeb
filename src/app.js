@@ -56,10 +56,10 @@ app.use(cors());
 app.options('*', cors());
 
 // v1 api routes
-app.use('/ecomerce/api//v4', routesV4);
+app.use('/ecomerce/api/v4', routesV4);
 app.use('/ecomerce/api/payos/webhook', payOsController.receiveDataHook);
 
-app.get('/', (req, res) => {
+app.get('/ecomerce/api', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
