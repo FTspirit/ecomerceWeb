@@ -1,4 +1,8 @@
-# RESTful API Node Sever Gofa-user
+# RESTful API SOUND TECH backend
+
+## Author:
+
+- **FT SPIRIT**
 
 ## Manual Installation
 
