@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-plusplus */
 /* eslint-disable camelcase */
@@ -22,20 +23,24 @@ const createOrderController = catchAsync(async (req, res) => {
     payment: payment || null,
     payment_status: payment_status || 'pending',
   };
-  const createData = await orderService.createOrder(orderData);
-  const orderDetailData = [];
-  for (let i = 0; i < product_data.length; i++) {
-    const productData = {
-      order_id: createData.id,
-      product_id: product_data[i].product_id,
-      amount: product_data[i].amount,
-      price: product_data[i].price,
-    };
-    await orderDetailService.createOrderDetail(productData);
-    orderDetailData.push(productData);
+  try {
+    const createData = await orderService.createOrder(orderData);
+    const orderDetailData = [];
+    for (let i = 0; i < product_data.length; i++) {
+      const productData = {
+        order_id: createData.id,
+        product_id: product_data[i].product_id,
+        amount: product_data[i].amount,
+        price: product_data[i].price,
+      };
+      await orderDetailService.createOrderDetail(productData);
+      orderDetailData.push(productData);
+    }
+    createData.order_detail = orderDetailData;
+    res.status(200).send(createData);
+  } catch (error) {
+    console.log(error);
   }
-  createData.order_detail = orderDetailData;
-  res.status(200).send(createData);
 });
 
 const updateCategoryController = catchAsync(async (req, res) => {
