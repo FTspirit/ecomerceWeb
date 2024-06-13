@@ -56,8 +56,8 @@ app.use(cors());
 app.options('*', cors());
 
 // v1 api routes
-app.use('/v4', routesV4);
-app.use('/payos/webhook', payOsController.receiveDataHook);
+app.use('/ecomerce/api//v4', routesV4);
+app.use('/ecomerce/api/payos/webhook', payOsController.receiveDataHook);
 
 app.get('/', (req, res) => {
   res.status(200).json({ status: 'ok' });
